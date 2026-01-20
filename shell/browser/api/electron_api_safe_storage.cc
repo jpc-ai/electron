@@ -134,7 +134,7 @@ bool SafeStorage::IsEncryptionAvailable() {
     return false;
 #if BUILDFLAG(IS_LINUX)
   return OSCrypt::IsEncryptionAvailable() ||
-         (use_password_v10 &&
+         (use_password_v10_ &&
           static_cast<BrowserProcessImpl*>(g_browser_process)
                   ->linux_storage_backend() == "basic_text");
 #else

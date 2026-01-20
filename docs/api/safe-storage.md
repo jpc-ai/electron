@@ -94,3 +94,22 @@ is provided `--password-store="kwallet5"`.
 * `kwallet6` - When the desktop session is `kde6` or if the following command line flag
 is provided `--password-store="kwallet6"`.
 * `unknown` - When the function is called before app has emitted the `ready` event.
+
+## Linux Storage Configuration
+
+On Linux, you can customize the storage backend configuration using additional command-line flags:
+
+* `--app-name` - Overrides the application name used for D-Bus attributes and secret storage. Defaults to `app.getName()`.
+* `--kwallet-folder` - Specifies the folder name in KWallet where encryption keys are stored. Defaults to `"{app.getName()} Keys"`.
+* `--key-name` - Specifies the key name used for storing the encryption key. Defaults to `"{app.getName()} Safe Storage"`.
+
+These flags allow you to customize storage locations and prevent conflicts when multiple Electron apps need to use different encryption key storage.
+
+**Example:**
+
+```javascript
+// Must be called before the 'ready' event
+app.commandLine.appendSwitch('app-name', 'my-custom-app-name');
+app.commandLine.appendSwitch('kwallet-folder', 'My App Keys');
+app.commandLine.appendSwitch('key-name', 'My App Safe Storage');
+```
